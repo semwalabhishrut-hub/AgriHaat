@@ -18,7 +18,7 @@ export function HelpWidget() {
           </div>
           <div className="p-4">
             <p className="text-sm text-muted-foreground">
-              Ask Farm2Market AI anything about our marketplace, listings, or logistics.
+              Ask AgriHaat AI anything about our marketplace, listings, or logistics.
             </p>
             <div className="mt-3 flex gap-2">
               <input

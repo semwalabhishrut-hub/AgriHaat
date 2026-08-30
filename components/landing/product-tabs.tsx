@@ -90,7 +90,7 @@ export function ProductTabs() {
                     Plan harvests based on actual regional consumption.
                   </h3>
                   <p className="text-sm leading-relaxed text-[#687D6B]">
-                    Farm2Market analyzes regional buyer order patterns to project demand 7–14 days ahead, guiding farmers on when to harvest and aggregate.
+                    AgriHaat analyzes regional buyer order patterns to project demand 7–14 days ahead, guiding farmers on when to harvest and aggregate.
                   </p>
                   <ul className="space-y-2 pt-2 text-xs text-[#172019]">
                     <li className="flex items-center gap-2">

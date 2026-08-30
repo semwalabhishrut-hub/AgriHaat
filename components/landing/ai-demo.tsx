@@ -62,7 +62,7 @@ export function AIDemo() {
                       <Sparkles className="size-4" />
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-white">Farm2Market Copilot</p>
+                      <p className="text-sm font-semibold text-white">AgriHaat Copilot</p>
                       <p className="text-[11px] text-gray-400">Grounded Agricultural AI</p>
                     </div>
                   </div>

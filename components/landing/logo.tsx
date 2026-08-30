@@ -1,54 +1,95 @@
 "use client";
 
-// ─── Farm2Market AI Logo ───
-// Leaf + sun + field + road/flow lines motif
+// ─── AgriHaat AI Premium Logo ───
+// Fusion of Golden Harvest Stalk + Emerald Sprout + Direct Marketplace Node
 
 interface LogoProps {
   className?: string;
   size?: number;
+  showBadge?: boolean;
 }
 
-function LogoIcon({ size = 36 }: { size?: number }) {
+export function LogoIcon({ size = 38 }: { size?: number }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-      {/* Sun circle */}
-      <circle cx="24" cy="14" r="6" fill="#16A34A" opacity="0.3" />
-      {/* Field / ground */}
-      <path d="M4 36 C12 28, 20 30, 24 26 C28 30, 36 28, 44 36" stroke="#16803A" strokeWidth="2" fill="none" />
-      <path d="M4 40 C14 34, 22 36, 24 32 C26 36, 34 34, 44 40" stroke="#16803A" strokeWidth="1.5" fill="none" opacity="0.5" />
-      {/* Main leaf */}
-      <path d="M24 8 C18 14, 14 22, 24 32 C34 22, 30 14, 24 8Z" fill="#16803A" />
-      {/* Leaf vein / road line */}
-      <path d="M24 12 L24 28" stroke="white" strokeWidth="1.5" strokeLinecap="round" />
-      <path d="M24 18 L20 15" stroke="white" strokeWidth="1" strokeLinecap="round" />
-      <path d="M24 22 L28 19" stroke="white" strokeWidth="1" strokeLinecap="round" />
-      {/* Sun rays */}
-      <circle cx="24" cy="14" r="3" fill="#16A34A" />
+    <svg
+      width={size}
+      height={size}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className="shrink-0 transition-transform duration-300 hover:scale-105"
+      aria-hidden="true"
+    >
+      <defs>
+        <linearGradient id="agriGradientEmerald" x1="4" y1="4" x2="44" y2="44" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#16A34A" />
+          <stop offset="0.6" stopColor="#16803A" />
+          <stop offset="1" stopColor="#0B4B22" />
+        </linearGradient>
+        <linearGradient id="agriGradientGold" x1="14" y1="8" x2="40" y2="34" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#FACC15" />
+          <stop offset="0.7" stopColor="#EAB308" />
+          <stop offset="1" stopColor="#CA8A04" />
+        </linearGradient>
+        <linearGradient id="agriGlow" x1="0" y1="0" x2="48" y2="48" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#EEF7EF" stopOpacity="0.8" />
+          <stop offset="1" stopColor="#DCFCE7" stopOpacity="0.3" />
+        </linearGradient>
+      </defs>
+
+      {/* Outer rounded hexagon shield / marketplace canopy */}
+      <rect x="2" y="2" width="44" height="44" rx="14" fill="url(#agriGlow)" stroke="#16803A" strokeWidth="1.5" strokeOpacity="0.25" />
+
+      {/* Sun / Dawn of Agri Marketplace */}
+      <circle cx="24" cy="15" r="7" fill="url(#agriGradientGold)" opacity="0.35" />
+      <circle cx="24" cy="15" r="3.5" fill="url(#agriGradientGold)" />
+
+      {/* Dynamic Furrow lines / Marketplace Trade Streams */}
+      <path d="M7 38 C14 31, 20 33, 24 29 C28 33, 34 31, 41 38" stroke="#16803A" strokeWidth="2.2" strokeLinecap="round" />
+      <path d="M10 42 C16 36, 21 38, 24 35 C27 38, 32 36, 38 42" stroke="#16A34A" strokeWidth="1.6" strokeLinecap="round" opacity="0.6" />
+
+      {/* Central Sprout Leaf & Harvest Stalk */}
+      <path
+        d="M24 8 C17 15, 13.5 24, 24 33 C34.5 24, 31 15, 24 8 Z"
+        fill="url(#agriGradientEmerald)"
+        filter="drop-shadow(0 2px 4px rgba(22, 128, 58, 0.25))"
+      />
+
+      {/* Internal Vein / Direct Route Path to Market */}
+      <path d="M24 13 L24 29" stroke="#FFFFFF" strokeWidth="1.75" strokeLinecap="round" />
+      <path d="M24 19 L19.5 16" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
+      <path d="M24 23 L28.5 20" stroke="#FFFFFF" strokeWidth="1.5" strokeLinecap="round" />
     </svg>
   );
 }
 
-export function Logo({ className = "", size = 36 }: LogoProps) {
+export function Logo({ className = "", size = 38, showBadge = true }: LogoProps) {
   return (
-    <div className={`flex items-center gap-2.5 ${className}`}>
+    <div className={`flex items-center gap-2.5 select-none ${className}`}>
       <LogoIcon size={size} />
-      <span className="text-xl font-semibold tracking-tight">
-        <span className="text-[#172019]">Farm2Market </span>
-        <span className="text-[#16803A]">AI</span>
-      </span>
+      <div className="flex items-center">
+        <span className="font-serif text-2xl font-bold tracking-tight text-[#172019]">
+          Agri<span className="text-[#16803A]">Haat</span>
+        </span>
+        {showBadge && (
+          <span className="ml-2 rounded-md bg-gradient-to-r from-[#16803A] to-[#22C55E] px-1.5 py-0.5 text-[10px] font-black uppercase tracking-wider text-white shadow-2xs">
+            AI
+          </span>
+        )}
+      </div>
     </div>
   );
 }
 
-export function LogoMark({ size = 36 }: { size?: number }) {
+export function LogoMark({ size = 38 }: { size?: number }) {
   return <LogoIcon size={size} />;
 }
 
-export function LogoWithTagline({ className = "", size = 36 }: LogoProps) {
+export function LogoWithTagline({ className = "", size = 38 }: LogoProps) {
   return (
     <div className={className}>
       <Logo size={size} />
-      <p className="mt-1 ml-[calc(36px+10px)] text-[11px] font-medium tracking-wide text-[#687D6B]">
+      <p className="mt-1 ml-[calc(38px+10px)] text-[11px] font-medium tracking-wide text-[#687D6B]">
         Direct Roots. Stronger Tomorrow.
       </p>
     </div>

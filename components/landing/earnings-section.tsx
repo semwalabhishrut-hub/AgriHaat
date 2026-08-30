@@ -29,7 +29,7 @@ export function EarningsSection() {
 
             <ScrollReveal delay={200}>
               <p className="mt-4 text-base leading-relaxed text-[#687D6B]">
-                Traditional supply chains hide fees behind complex commission deductions. Farm2Market gives farmers a clear, itemized realization statement before every truck leaves the gate.
+                Traditional supply chains hide fees behind complex commission deductions. AgriHaat gives farmers a clear, itemized realization statement before every truck leaves the gate.
               </p>
             </ScrollReveal>
 

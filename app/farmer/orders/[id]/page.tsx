@@ -233,7 +233,7 @@ export default function OrderStatusDetailPage({ params }: { params: Promise<{ id
             <div className="flex items-center justify-between border-b border-[#E2E7E2] pb-4">
               <div>
                 <span className="text-[10px] font-bold uppercase tracking-wider text-[#16803A]">
-                  FARM2MARKET AI OFFICIAL RECEIPT
+                  AGRIHAAT AI OFFICIAL RECEIPT
                 </span>
                 <h3 className="font-serif text-2xl font-bold text-[#172019]">
                   Tax Invoice #{order.orderNumber}
@@ -252,7 +252,7 @@ export default function OrderStatusDetailPage({ params }: { params: Promise<{ id
             <div className="p-6 border border-[#E2E7E2] rounded-2xl space-y-4 text-xs">
               <div className="flex justify-between">
                 <div>
-                  <p className="font-bold text-sm text-[#172019]">Farm2Market AI Marketplace Pvt Ltd</p>
+                  <p className="font-bold text-sm text-[#172019]">AgriHaat AI Marketplace Pvt Ltd</p>
                   <p className="text-[#687D6B]">GSTIN: 33AAACF2026M1Z5</p>
                 </div>
                 <div className="text-right">

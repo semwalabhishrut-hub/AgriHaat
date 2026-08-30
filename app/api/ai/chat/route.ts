@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 
-const SYSTEM_PROMPT = `You are Farm2Market AI, a specialized agricultural marketplace assistant for India (Ministry of Consumer Affairs Problem Statement 26033/26032).
+const SYSTEM_PROMPT = `You are AgriHaat AI, a specialized agricultural marketplace assistant for India (Ministry of Consumer Affairs Problem Statement 26033/26032).
 You assist farmers, FPOs, bulk buyers, logistics drivers, and procurement centre operators.
 Key Grounded Platform Context:
 - Direct farm-to-buyer trade removes intermediaries and increases farmer earnings by ~18-25%.

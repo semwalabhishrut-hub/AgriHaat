@@ -1,6 +1,6 @@
-# Farm2Market AI — External API & Services Setup Guide
+# AgriHaat AI — External API & Services Setup Guide
 
-This document provides exact instructions and environment variables to connect real third-party backend and AI services to **Farm2Market AI**.
+This document provides exact instructions and environment variables to connect real third-party backend and AI services to **AgriHaat AI**.
 
 > [!NOTE]
 > The application is completely functional out-of-the-box using the built-in **Service Abstraction Layer** (`lib/services/`). Adding external API keys will automatically promote mock providers to production services without requiring any UI changes.
@@ -13,38 +13,44 @@ Create a `.env.local` file in the root of the project:
 
 ```bash
 # ─── 1. SUPABASE (PostgreSQL + Auth + Storage) ───
-NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=eyJhbGciOi...
-SUPABASE_SERVICE_ROLE_KEY=eyJhbGciOi...
+NEXT_PUBLIC_SUPABASE_URL=https://oukoidwiwtdckkatmpbv.supabase.co
+DATABASE_URL=postgresql://postgres.oukoidwiwtdckkatmpbv:[YOUR-PASSWORD]@aws-0-ap-northeast-2.pooler.supabase.com:5432/postgres
+SUPABASE_HOST=aws-0-ap-northeast-2.pooler.supabase.com
+SUPABASE_PORT=5432
+SUPABASE_DB=postgres
+SUPABASE_USER=postgres.oukoidwiwtdckkatmpbv
 
 # ─── 2. GOOGLE GEMINI API (Generative AI Market Insights) ───
-GEMINI_API_KEY=AIzaSy...
+GEMINI_API_KEY=your_gemini_api_key_here
+GEMINI_MODEL=gemini-2.5-flash-lite
 
-# ─── 3. GOOGLE MAPS PLATFORM (Routing & Geocoding) ───
-NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=AIzaSy...
-GOOGLE_MAPS_SERVER_KEY=AIzaSy...
-
-# ─── 4. PAYMENT GATEWAY SANDBOX (Razorpay / Stripe) ───
-NEXT_PUBLIC_RAZORPAY_KEY_ID=rzp_test_...
-RAZORPAY_KEY_SECRET=...
+# ─── 3. PAYMENT GATEWAY (DEMO SANDBOX) ───
+NEXT_PUBLIC_PAYMENT_MODE=demo
 ```
 
 ---
 
-## 2. Supabase Integration (Database & Auth)
+## 2. Supabase Database Schema Execution (1-Click Setup)
 
-1. Go to [https://supabase.com](https://supabase.com) and create a free project.
-2. Under **Project Settings → API**, copy:
-   - `Project URL` → `NEXT_PUBLIC_SUPABASE_URL`
-   - `anon public key` → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `service_role secret` → `SUPABASE_SERVICE_ROLE_KEY`
-3. Under **SQL Editor**, run the database schema defined in `ARCHITECTURE.md` (§3 Core Tables):
-   - Tables: `profiles`, `produce_listings`, `orders`, `order_allocations`, `procurement_centres`, `procurement_bookings`, `logistics_routes`, `demand_forecasts`, `notifications`, `audit_logs`.
-4. Enable **Row Level Security (RLS)**:
-   - Farmers can read/write their own listings.
-   - Buyers can read active listings and manage their own orders.
+To create all tables, columns, relations, and demo records in Supabase:
 
----
+1. Log in to your [Supabase Project Dashboard](https://supabase.com/dashboard/project/oukoidwiwtdckkatmpbv).
+2. On the left navigation sidebar, click on **SQL Editor** (icon with `>_`).
+3. Click **+ New query**.
+4. Open the provided file [`supabase_schema.sql`](file:///E:/SIH/FARM2MARKET%20AI/supabase_schema.sql), copy the entire SQL script, and paste it into the editor.
+5. Click **Run** (or press `Ctrl+Enter`).
+6. Supabase will immediately create all 10 core tables:
+   - `profiles`
+   - `produce_listings`
+   - `orders`
+   - `order_allocations`
+   - `procurement_centres`
+   - `procurement_bookings`
+   - `logistics_routes`
+   - `demand_forecasts`
+   - `notifications`
+   - `audit_logs`
+   along with all Row Level Security (RLS) policies and seed records!
 
 ## 3. Google Gemini API (AI Copilot & Natural Language Explanations)
 

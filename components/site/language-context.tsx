@@ -126,7 +126,7 @@ const en: Translations = {
   heroEyebrow: "DIRECT AGRICULTURAL MARKETPLACE",
   heroLine1: "From the farm,",
   heroLine2: "straight to the market.",
-  heroSub: "Farm2Market connects farmers and FPOs directly with buyers, then coordinates demand, aggregation and logistics so produce can move with fewer unnecessary intermediaries.",
+  heroSub: "AgriHaat connects farmers and FPOs directly with buyers, then coordinates demand, aggregation and logistics so produce can move with fewer unnecessary intermediaries.",
   exploreMarketplace: "Explore Marketplace",
   seeHowItWorks: "See How It Works",
   trustBuilt: "Built for farmers, FPOs and verified buyers",
@@ -135,7 +135,7 @@ const en: Translations = {
 
   priceTransparency: "PRICE TRANSPARENCY",
   betterDecisions: "Better decisions start with better visibility.",
-  betterDecisionsSub: "Farm2Market brings supply, demand, pricing and logistics into one workflow — so farmers can decide what to sell, buyers can plan what to source, and the platform can coordinate what moves where.",
+  betterDecisionsSub: "AgriHaat brings supply, demand, pricing and logistics into one workflow — so farmers can decide what to sell, buyers can plan what to source, and the platform can coordinate what moves where.",
   farmerRealization: "Farmer realization",
   perKg: "per kg",
   buyerPrice: "Buyer price",
@@ -159,7 +159,7 @@ const en: Translations = {
 
   smartLogistics: "SMART LOGISTICS",
   oneOrder: "One order. Multiple farms. One coordinated pickup.",
-  oneOrderSub: "When several nearby farmers can fulfill the same buyer order, Farm2Market can aggregate the supply and coordinate pickup instead of sending separate shipments.",
+  oneOrderSub: "When several nearby farmers can fulfill the same buyer order, AgriHaat can aggregate the supply and coordinate pickup instead of sending separate shipments.",
   seeExampleRoute: "See an example route",
 
   knowWhatReaches: "Know what reaches you.",
@@ -180,7 +180,7 @@ const en: Translations = {
 
   askTheMarket: "Ask the market.",
   askTheMarketSub: "Understand the next move.",
-  tryFarm2Market: "Try Farm2Market",
+  tryFarm2Market: "Try AgriHaat",
   protoAiLabel: "Prototype AI interaction · demo data",
 
   readyToStart: "READY TO START?",
@@ -195,7 +195,7 @@ const en: Translations = {
   stayUpdatedSub: "Get the latest updates about new features and opportunities.",
   enterEmail: "Enter your email",
   subscribe: "Subscribe",
-  copyright: "© 2026 Farm2Market AI. All rights reserved.",
+  copyright: "© 2026 AgriHaat AI. All rights reserved.",
   madeInIndia: "Made in India 🇮🇳",
   footerTagline: "खेत से सप्लाई | A stronger food future.",
 
@@ -219,7 +219,7 @@ const hi: Translations = {
   heroEyebrow: "सीधा कृषि मार्केटप्लेस",
   heroLine1: "खेत से सीधे,",
   heroLine2: "बाज़ार तक!",
-  heroSub: "Farm2Market किसानों और FPOs को खरीदारों से सीधे जोड़ता है, फिर मांग, संग्रह और लॉजिस्टिक्स का समन्वय करता है ताकि उपज कम बिचौलियों के साथ आगे बढ़ सके।",
+  heroSub: "AgriHaat किसानों और FPOs को खरीदारों से सीधे जोड़ता है, फिर मांग, संग्रह और लॉजिस्टिक्स का समन्वय करता है ताकि उपज कम बिचौलियों के साथ आगे बढ़ सके।",
   exploreMarketplace: "मार्केटप्लेस देखें",
   seeHowItWorks: "कैसे काम करता है देखें",
   trustBuilt: "किसानों, FPOs और सत्यापित खरीदारों के लिए बनाया गया",
@@ -228,7 +228,7 @@ const hi: Translations = {
 
   priceTransparency: "मूल्य पारदर्शिता",
   betterDecisions: "बेहतर जानकारी से बेहतर फैसले।",
-  betterDecisionsSub: "Farm2Market आपूर्ति, मांग, मूल्य और लॉजिस्टिक्स को एक वर्कफ़्लो में लाता है — ताकि किसान तय करें क्या बेचना है, खरीदार योजना बनाएं क्या खरीदना है।",
+  betterDecisionsSub: "AgriHaat आपूर्ति, मांग, मूल्य और लॉजिस्टिक्स को एक वर्कफ़्लो में लाता है — ताकि किसान तय करें क्या बेचना है, खरीदार योजना बनाएं क्या खरीदना है।",
   farmerRealization: "किसान की प्राप्ति",
   perKg: "प्रति किलो",
   buyerPrice: "खरीदार मूल्य",
@@ -252,7 +252,7 @@ const hi: Translations = {
 
   smartLogistics: "स्मार्ट लॉजिस्टिक्स",
   oneOrder: "एक ऑर्डर। कई खेत। एक समन्वित पिकअप।",
-  oneOrderSub: "जब कई नजदीकी किसान एक ही खरीदार का ऑर्डर पूरा कर सकते हैं, Farm2Market आपूर्ति जोड़कर अलग-अलग शिपमेंट भेजने के बजाय पिकअप का समन्वय कर सकता है।",
+  oneOrderSub: "जब कई नजदीकी किसान एक ही खरीदार का ऑर्डर पूरा कर सकते हैं, AgriHaat आपूर्ति जोड़कर अलग-अलग शिपमेंट भेजने के बजाय पिकअप का समन्वय कर सकता है।",
   seeExampleRoute: "उदाहरण मार्ग देखें",
 
   knowWhatReaches: "जानें आपको क्या मिलता है।",
@@ -273,7 +273,7 @@ const hi: Translations = {
 
   askTheMarket: "बाज़ार से पूछें।",
   askTheMarketSub: "अगला कदम समझें।",
-  tryFarm2Market: "Farm2Market आज़माएं",
+  tryFarm2Market: "AgriHaat आज़माएं",
   protoAiLabel: "प्रोटोटाइप AI इंटरैक्शन · डेमो डेटा",
 
   readyToStart: "शुरू करने के लिए तैयार?",
@@ -288,7 +288,7 @@ const hi: Translations = {
   stayUpdatedSub: "नई सुविधाओं और अवसरों के बारे में नवीनतम अपडेट प्राप्त करें।",
   enterEmail: "अपना ईमेल दर्ज करें",
   subscribe: "सदस्यता लें",
-  copyright: "© 2026 Farm2Market AI. सर्वाधिकार सुरक्षित।",
+  copyright: "© 2026 AgriHaat AI. सर्वाधिकार सुरक्षित।",
   madeInIndia: "भारत में निर्मित 🇮🇳",
   footerTagline: "खेत से सप्लाई | एक मजबूत खाद्य भविष्य।",
 

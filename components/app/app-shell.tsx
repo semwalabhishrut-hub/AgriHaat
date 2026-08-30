@@ -190,7 +190,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
               </Link>
             </div>
             <div className="hidden sm:flex items-center gap-2 text-xs text-[#687D6B]">
-              <span className="font-semibold text-[#172019]">Farm2Market AI Platform</span>
+              <span className="font-semibold text-[#172019]">AgriHaat AI Platform</span>
               <span>/</span>
               <span className="capitalize">{role} Portal</span>
             </div>

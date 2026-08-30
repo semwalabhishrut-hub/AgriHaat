@@ -9,9 +9,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const lora = Lora({ subsets: ["latin"], variable: "--font-lora" });
 
 export const metadata: Metadata = {
-  title: "Farm2Market AI | Direct Roots. Stronger Tomorrow.",
+  title: "AgriHaat AI | Direct Roots. Stronger Tomorrow.",
   description: "A transparent agricultural marketplace connecting Indian farmers, FPOs, and verified buyers with demand forecasting and coordinated logistics.",
-  generator: "Farm2Market AI",
+  generator: "AgriHaat AI",
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

@@ -23,8 +23,8 @@ export function AIAssistantModal({ isOpen, onClose }: { isOpen: boolean; onClose
       role: "assistant",
       text:
         lang === "hi"
-          ? "नमस्ते! मैं Farm2Market AI सहायक हूँ। आप मुझसे मंडी भाव, मांग का पूर्वानुमान, लॉजिस्टिक्स रूट, या खरीद केंद्र स्लॉट के बारे में कुछ भी पूछ सकते हैं।"
-          : "Namaste! I am the Farm2Market AI Copilot. Ask me about mandi trends, demand forecasts, supply aggregation, or procurement centre slots.",
+          ? "नमस्ते! मैं AgriHaat AI सहायक हूँ। आप मुझसे मंडी भाव, मांग का पूर्वानुमान, लॉजिस्टिक्स रूट, या खरीद केंद्र स्लॉट के बारे में कुछ भी पूछ सकते हैं।"
+          : "Namaste! I am the AgriHaat AI Copilot. Ask me about mandi trends, demand forecasts, supply aggregation, or procurement centre slots.",
     },
   ]);
   const [input, setInput] = useState("");
@@ -59,8 +59,8 @@ export function AIAssistantModal({ isOpen, onClose }: { isOpen: boolean; onClose
       } else if (lower.includes("2000") || lower.includes("2,000") || lower.includes("kaha se") || lower.includes("procure") || lower.includes("source")) {
         reply =
           lang === "hi"
-            ? "वर्तमान डेमो इन्वेंट्री में 3 नजदीकी विक्रेताओं के पास 2,450 किलो टमाटर उपलब्ध हैं (ABC FPO: 800 kg, GreenFields: 700 kg, Ramesh Farm: 500 kg)। Farm2Market इन्हें एक ही वाहन से 124 किमी के समन्वित रूट में जोड़कर डिलीवरी कर सकता है।"
-            : "Current demo inventory has 2,450 kg across 3 verified sellers (ABC FPO 800kg, GreenFields 700kg, Ramesh Farm 500kg). Farm2Market can aggregate 2,000 kg into a single 124 km multi-stop route with delivery scheduled for tomorrow morning.";
+            ? "वर्तमान डेमो इन्वेंट्री में 3 नजदीकी विक्रेताओं के पास 2,450 किलो टमाटर उपलब्ध हैं (ABC FPO: 800 kg, GreenFields: 700 kg, Ramesh Farm: 500 kg)। AgriHaat इन्हें एक ही वाहन से 124 किमी के समन्वित रूट में जोड़कर डिलीवरी कर सकता है।"
+            : "Current demo inventory has 2,450 kg across 3 verified sellers (ABC FPO 800kg, GreenFields 700kg, Ramesh Farm 500kg). AgriHaat can aggregate 2,000 kg into a single 124 km multi-stop route with delivery scheduled for tomorrow morning.";
       } else if (lower.includes("slot") || lower.includes("procurement") || lower.includes("centre") || lower.includes("kendra")) {
         reply =
           lang === "hi"
@@ -69,8 +69,8 @@ export function AIAssistantModal({ isOpen, onClose }: { isOpen: boolean; onClose
       } else {
         reply =
           lang === "hi"
-            ? `आपके प्रश्न "${textToSend}" के संदर्भ में: Farm2Market सीधे किसानों को खरीदारों से जोड़ता है। टमाटर की वर्तमान मांग मजबूत है और खरीद केंद्र स्लॉट खुले हैं। (डेमो संदर्भ)`
-            : `Regarding "${textToSend}": Farm2Market's live matching engine currently tracks verified listings and procurement slots in Tamil Nadu & Andhra Pradesh. Average realization remains 18% higher than conventional intermediaries. (Demo data)`;
+            ? `आपके प्रश्न "${textToSend}" के संदर्भ में: AgriHaat सीधे किसानों को खरीदारों से जोड़ता है। टमाटर की वर्तमान मांग मजबूत है और खरीद केंद्र स्लॉट खुले हैं। (डेमो संदर्भ)`
+            : `Regarding "${textToSend}": AgriHaat's live matching engine currently tracks verified listings and procurement slots in Tamil Nadu & Andhra Pradesh. Average realization remains 18% higher than conventional intermediaries. (Demo data)`;
       }
 
       setMessages((prev) => [...prev, { role: "assistant", text: reply }]);
@@ -91,7 +91,7 @@ export function AIAssistantModal({ isOpen, onClose }: { isOpen: boolean; onClose
               <Sparkles className="size-4" />
             </div>
             <div>
-              <h3 className="font-serif text-base font-semibold">Farm2Market Copilot</h3>
+              <h3 className="font-serif text-base font-semibold">AgriHaat Copilot</h3>
               <p className="text-[11px] text-gray-300">Grounded Agricultural AI</p>
             </div>
           </div>

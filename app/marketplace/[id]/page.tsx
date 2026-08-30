@@ -310,7 +310,7 @@ export default function ListingDetailPage({ params }: { params: Promise<{ id: st
 
             <div className="space-y-3 text-xs">
               <p className="text-[#687D6B]">
-                Available nearby supply is <strong>2,450 kg</strong>. Farm2Market coordinates supply from 3 verified farmers into a single consolidated pickup run:
+                Available nearby supply is <strong>2,450 kg</strong>. AgriHaat coordinates supply from 3 verified farmers into a single consolidated pickup run:
               </p>
 
               <div className="rounded-2xl border border-[#E2E7E2] divide-y divide-[#E2E7E2] overflow-hidden bg-[#FAFAF7]">

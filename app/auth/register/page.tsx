@@ -52,7 +52,7 @@ export default function RegisterPage() {
       <div className="max-w-md w-full mx-auto my-8 bg-white rounded-3xl border border-[#E2E7E2] p-6 sm:p-8 shadow-sm space-y-6">
         <div>
           <span className="text-[10px] font-bold uppercase tracking-wider text-[#16803A]">
-            JOIN FARM2MARKET DIRECT NETWORK
+            JOIN AGRIHAAT DIRECT NETWORK
           </span>
           <h1 className="font-serif text-2xl font-bold text-[#172019] mt-1">
             {lang === "hi" ? "नया खाता पंजीकृत करें" : "Create Verified Account"}
@@ -145,7 +145,7 @@ export default function RegisterPage() {
       </div>
 
       <div className="text-center text-xs text-[#687D6B]">
-        Farm2Market AI · Secure Agricultural Trade Network
+        AgriHaat AI · Secure Agricultural Trade Network
       </div>
     </div>
   );

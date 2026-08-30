@@ -29,7 +29,7 @@ export default function AdminDashboardPage() {
             GOVERNMENT & CENTRAL OPERATIONS CONSOLE
           </span>
           <h1 className="mt-1 font-serif text-2xl sm:text-3xl font-semibold text-[#172019]">
-            Farm2Market Central Platform Operations
+            AgriHaat Central Platform Operations
           </h1>
           <p className="text-xs text-[#687D6B]">
             System-wide oversight of verified farmers, FPO inventories, multi-stop logistics, and transparent realization audits.

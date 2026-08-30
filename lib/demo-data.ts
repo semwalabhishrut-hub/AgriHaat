@@ -120,8 +120,8 @@ export const buyerOrder = {
 
 export const faqItems = [
   {
-    q: "How does Farm2Market help farmers get a better price?",
-    qHi: "Farm2Market किसानों को बेहतर कीमत कैसे दिलाता है?",
+    q: "How does AgriHaat help farmers get a better price?",
+    qHi: "AgriHaat किसानों को बेहतर कीमत कैसे दिलाता है?",
     a: "By connecting farmers directly with buyers, the platform reduces the number of intermediaries. The transparent pricing breakdown shows exactly what the farmer receives after logistics and platform fees.",
     aHi: "किसानों को सीधे खरीदारों से जोड़कर, प्लेटफ़ॉर्म बिचौलियों की संख्या कम करता है। पारदर्शी मूल्य विवरण बताता है कि लॉजिस्टिक्स और प्लेटफ़ॉर्म शुल्क के बाद किसान को कितना मिलता है।",
   },
@@ -134,14 +134,14 @@ export const faqItems = [
   {
     q: "Can multiple farmers fulfill one buyer order?",
     qHi: "क्या एक खरीदार के ऑर्डर को कई किसान पूरा कर सकते हैं?",
-    a: "Yes. Farm2Market can aggregate supply from nearby farmers and FPOs to fulfill larger buyer orders, coordinating pickup into a single logistics run.",
-    aHi: "हाँ। Farm2Market नजदीकी किसानों और FPOs से आपूर्ति जोड़कर बड़े ऑर्डर पूरे कर सकता है।",
+    a: "Yes. AgriHaat can aggregate supply from nearby farmers and FPOs to fulfill larger buyer orders, coordinating pickup into a single logistics run.",
+    aHi: "हाँ। AgriHaat नजदीकी किसानों और FPOs से आपूर्ति जोड़कर बड़े ऑर्डर पूरे कर सकता है।",
   },
   {
     q: "Who handles pickup and delivery?",
     qHi: "पिकअप और डिलीवरी कौन करता है?",
-    a: "Farm2Market coordinates logistics partners and optimizes routes for efficient pickup from farms and delivery to buyers. The platform handles the coordination, not the physical transport.",
-    aHi: "Farm2Market लॉजिस्टिक्स पार्टनरों का समन्वय करता है और कुशल पिकअप और डिलीवरी के लिए मार्ग अनुकूलित करता है।",
+    a: "AgriHaat coordinates logistics partners and optimizes routes for efficient pickup from farms and delivery to buyers. The platform handles the coordination, not the physical transport.",
+    aHi: "AgriHaat लॉजिस्टिक्स पार्टनरों का समन्वय करता है और कुशल पिकअप और डिलीवरी के लिए मार्ग अनुकूलित करता है।",
   },
   {
     q: "Can buyers order large quantities?",

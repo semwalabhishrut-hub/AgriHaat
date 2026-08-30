@@ -38,7 +38,7 @@ export function Navbar() {
         aria-label="Main navigation"
       >
         {/* LEFT — Logo */}
-        <Link href="/" className="shrink-0" aria-label="Farm2Market AI home">
+        <Link href="/" className="shrink-0" aria-label="AgriHaat AI home">
           <Logo size={34} />
         </Link>
 

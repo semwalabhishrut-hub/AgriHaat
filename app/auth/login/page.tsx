@@ -57,7 +57,7 @@ export default function LoginPage() {
       <div className="max-w-md w-full mx-auto my-8 bg-white rounded-3xl border border-[#E2E7E2] p-6 sm:p-8 shadow-sm space-y-6">
         <div>
           <span className="text-[10px] font-bold uppercase tracking-wider text-[#16803A]">
-            FARM2MARKET SECURE LOGIN
+            AGRIHAAT SECURE LOGIN
           </span>
           <h1 className="font-serif text-2xl font-bold text-[#172019] mt-1">
             {lang === "hi" ? "प्लेटफ़ॉर्म में प्रवेश करें" : "Sign In to Your Workspace"}
@@ -173,7 +173,7 @@ export default function LoginPage() {
 
       {/* Footer */}
       <div className="text-center text-xs text-[#687D6B]">
-        Farm2Market AI · Ministry of Consumer Affairs Problem Statement 26033/26032
+        AgriHaat AI · Ministry of Consumer Affairs Problem Statement 26033/26032
       </div>
     </div>
   );
