@@ -486,3 +486,5 @@ export function RouteMapCanvas({ className = "" }: { className?: string }) {
     </div>
   );
 }
+
+export const RouteMap = RouteMapCanvas;
