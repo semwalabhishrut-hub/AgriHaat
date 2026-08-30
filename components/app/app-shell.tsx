@@ -32,6 +32,8 @@ import { useAuth } from "@/components/auth/auth-context";
 import { useLanguage, LanguageSwitcher } from "@/components/site/language-context";
 import { RoleSwitcherBadge } from "./role-switcher";
 import { NotificationDrawer } from "./notification-drawer";
+import { AIAssistantModal } from "@/components/ai/ai-assistant-modal";
+import { Sparkles } from "lucide-react";
 
 interface NavItem {
   label: string;
@@ -46,6 +48,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
   const { user, logout } = useAuth();
   const { lang } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [aiChatOpen, setAiChatOpen] = useState(false);
 
   const role = user?.role || "farmer";
 
@@ -270,6 +273,20 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           })}
         </nav>
       </div>
+
+      {/* ─── Floating AI Chat Button (visible on all authenticated pages) ─── */}
+      <button
+        type="button"
+        onClick={() => setAiChatOpen(true)}
+        className="fixed bottom-20 lg:bottom-6 right-4 lg:right-6 z-40 flex items-center gap-2 rounded-full bg-[#16803A] px-4 py-3 text-xs font-bold text-white shadow-lg hover:bg-[#16803A]/90 transition-all hover:scale-105 active:scale-95"
+        aria-label="Open AgriHaat AI Copilot"
+      >
+        <Sparkles className="size-4" />
+        <span className="hidden sm:inline">Ask AI</span>
+      </button>
+
+      {/* AI Assistant Modal */}
+      <AIAssistantModal isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} />
     </div>
   );
 }

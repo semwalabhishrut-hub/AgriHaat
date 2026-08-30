@@ -14,6 +14,9 @@ import {
   Sparkles,
   ShieldCheck,
   CheckCircle2,
+  Camera,
+  Image as ImageIcon,
+  Trash2,
 } from "lucide-react";
 import { AppShell } from "@/components/app/app-shell";
 import { MarketplaceService } from "@/lib/services";
@@ -24,9 +27,9 @@ const PRODUCE_OPTIONS = [
   { id: "tomato", name: "Tomatoes", nameHi: "टमाटर", image: "/tomatoes-market.png", category: "Vegetables" as const },
   { id: "onion", name: "Red Onions", nameHi: "लाल प्याज", image: "/onion.jpg", category: "Vegetables" as const },
   { id: "potato", name: "Potatoes", nameHi: "आलू", image: "/potato.jpg", category: "Vegetables" as const },
-  { id: "rice", name: "Basmati Rice", nameHi: "बासमती चावल", image: "/potato.jpg", category: "Grains" as const },
-  { id: "wheat", name: "Sharbati Wheat", nameHi: "शरबती गेहूं", image: "/potato.jpg", category: "Grains" as const },
-  { id: "groundnut", name: "Groundnut", nameHi: "मूंगफली", image: "/potato.jpg", category: "Pulses" as const },
+  { id: "rice", name: "Basmati Rice", nameHi: "बासमती चावल", image: "/placeholder.svg", category: "Grains" as const },
+  { id: "wheat", name: "Sharbati Wheat", nameHi: "शरबती गेहूं", image: "/placeholder.svg", category: "Grains" as const },
+  { id: "groundnut", name: "Groundnut", nameHi: "मूंगफली", image: "/placeholder.svg", category: "Pulses" as const },
 ];
 
 export default function NewProduceListingPage() {
@@ -45,6 +48,7 @@ export default function NewProduceListingPage() {
   const [location, setLocation] = useState<string>("Kanchipuram, Tamil Nadu");
   const [windowFrom, setWindowFrom] = useState<string>("2026-08-29");
   const [windowTo, setWindowTo] = useState<string>("2026-09-02");
+  const [customPhoto, setCustomPhoto] = useState<string | null>(null);
   const [published, setPublished] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -75,7 +79,7 @@ export default function NewProduceListingPage() {
       district: "Kanchipuram",
       state: "Tamil Nadu",
       verified: true,
-      image: selectedProduce.image,
+      image: customPhoto || selectedProduce.image,
     });
 
     setLoading(false);
@@ -354,20 +358,110 @@ export default function NewProduceListingPage() {
               </div>
             )}
 
-            {/* ─── Step 8: Photos ─── */}
+            {/* ─── Step 8: Photos & Camera Capture ─── */}
             {step === 8 && (
               <div className="space-y-5">
                 <div>
                   <h3 className="font-serif text-lg font-bold text-[#172019]">
                     Step 8: Produce Inspection Photos
                   </h3>
-                  <p className="text-xs text-[#687D6B]">Upload photos of the harvested batch (optional for demo)</p>
+                  <p className="text-xs text-[#687D6B]">
+                    Take a photo with your mobile/laptop camera or upload from your gallery
+                  </p>
                 </div>
-                <div className="border-2 border-dashed border-[#E2E7E2] rounded-3xl p-8 text-center hover:bg-[#FAFAF7] cursor-pointer transition">
-                  <UploadCloud className="size-10 text-[#16803A] mx-auto mb-2" />
-                  <p className="text-xs font-bold text-[#172019]">Click to upload or drag crop photos here</p>
-                  <p className="text-[11px] text-[#687D6B] mt-1">PNG, JPG up to 10MB · Using demo photo asset</p>
-                </div>
+
+                {customPhoto ? (
+                  <div className="space-y-3">
+                    <div className="relative rounded-3xl overflow-hidden border border-[#E2E7E2] bg-black/5 max-h-72 flex items-center justify-center">
+                      <img src={customPhoto} alt="Uploaded produce" className="max-h-72 w-full object-contain rounded-3xl" />
+                      <button
+                        type="button"
+                        onClick={() => setCustomPhoto(null)}
+                        className="absolute top-3 right-3 grid size-9 place-items-center rounded-full bg-red-600 text-white shadow-md hover:bg-red-700 transition"
+                        title="Remove photo"
+                      >
+                        <Trash2 className="size-4" />
+                      </button>
+                    </div>
+                    <p className="text-xs text-center text-[#16803A] font-semibold flex items-center justify-center gap-1.5">
+                      <CheckCircle2 className="size-4" /> Custom photo uploaded for listing
+                    </p>
+                  </div>
+                ) : (
+                  <div className="space-y-4">
+                    {/* Upload Dropzone */}
+                    <label className="border-2 border-dashed border-[#16803A]/40 bg-[#EEF7EF]/30 rounded-3xl p-8 text-center hover:bg-[#EEF7EF]/60 cursor-pointer transition block">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (evt) => {
+                              if (typeof evt.target?.result === "string") {
+                                setCustomPhoto(evt.target.result);
+                              }
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                        className="hidden"
+                      />
+                      <UploadCloud className="size-12 text-[#16803A] mx-auto mb-2" />
+                      <p className="text-xs font-bold text-[#172019]">Click to choose from file gallery or drag & drop</p>
+                      <p className="text-[11px] text-[#687D6B] mt-1">PNG, JPG, WebP up to 15MB</p>
+                    </label>
+
+                    {/* Mobile Direct Camera Capture Button */}
+                    <div className="flex gap-3">
+                      <label className="flex-1 flex items-center justify-center gap-2 rounded-2xl border border-[#16803A] bg-[#EEF7EF] py-3 px-4 text-xs font-bold text-[#16803A] hover:bg-[#16803A] hover:text-white cursor-pointer transition">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          capture="environment"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onload = (evt) => {
+                                if (typeof evt.target?.result === "string") {
+                                  setCustomPhoto(evt.target.result);
+                                }
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                          className="hidden"
+                        />
+                        <Camera className="size-4" />
+                        Take Live Camera Photo
+                      </label>
+
+                      <label className="flex-1 flex items-center justify-center gap-2 rounded-2xl border border-[#E2E7E2] bg-white py-3 px-4 text-xs font-bold text-[#172019] hover:bg-[#FAFAF7] cursor-pointer transition">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          onChange={(e) => {
+                            const file = e.target.files?.[0];
+                            if (file) {
+                              const reader = new FileReader();
+                              reader.onload = (evt) => {
+                                if (typeof evt.target?.result === "string") {
+                                  setCustomPhoto(evt.target.result);
+                                }
+                              };
+                              reader.readAsDataURL(file);
+                            }
+                          }}
+                          className="hidden"
+                        />
+                        <ImageIcon className="size-4" />
+                        Choose from Gallery
+                      </label>
+                    </div>
+                  </div>
+                )}
               </div>
             )}
 

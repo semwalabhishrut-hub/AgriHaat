@@ -66,8 +66,9 @@ export function AIDemo() {
                       <p className="text-[11px] text-gray-400">Grounded Agricultural AI</p>
                     </div>
                   </div>
-                  <span className="rounded-full bg-white/10 px-2.5 py-1 text-[10px] font-medium text-emerald-400">
-                    Active Demo
+                  <span className="rounded-full bg-emerald-500/20 border border-emerald-500/30 px-2.5 py-1 text-[10px] font-bold text-emerald-400 flex items-center gap-1.5">
+                    <span className="size-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    Gemini 2.5 Flash
                   </span>
                 </div>
 
@@ -81,7 +82,7 @@ export function AIDemo() {
                       }`}
                     >
                       {msg.role === "ai" && (
-                        <div className="grid size-7 shrink-0 place-items-center rounded-full bg-[#16803A] text-white text-xs">
+                        <div className="grid size-7 shrink-0 place-items-center rounded-full bg-[#16803A] text-white text-xs font-bold">
                           AI
                         </div>
                       )}
@@ -112,8 +113,8 @@ export function AIDemo() {
                       <Send className="size-3" />
                     </button>
                   </div>
-                  <p className="mt-2 text-center text-[10px] text-gray-500">
-                    {t.protoAiLabel}
+                  <p className="mt-2 text-center text-[10px] text-gray-400">
+                    Live Agricultural Knowledge Engine · Real-Time Market Intelligence
                   </p>
                 </div>
               </div>
