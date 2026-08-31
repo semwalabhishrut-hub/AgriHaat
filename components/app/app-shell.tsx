@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import {
   LayoutDashboard,
@@ -26,14 +27,13 @@ import {
   HelpCircle,
   QrCode,
   Layers,
+  Sparkles,
 } from "lucide-react";
-import { Logo } from "@/components/landing/logo";
 import { useAuth } from "@/components/auth/auth-context";
 import { useLanguage, LanguageSwitcher } from "@/components/site/language-context";
 import { RoleSwitcherBadge } from "./role-switcher";
 import { NotificationDrawer } from "./notification-drawer";
-import { AIAssistantModal } from "@/components/ai/ai-assistant-modal";
-import { Sparkles } from "lucide-react";
+import { AIChatPopup } from "@/components/ai/AIChatPopup";
 
 interface NavItem {
   label: string;
@@ -113,8 +113,15 @@ export function AppShell({ children }: { children: React.ReactNode }) {
       <aside className="hidden lg:flex flex-col w-64 border-r border-[#E2E7E2] bg-white h-screen sticky top-0 z-30">
         {/* Brand Header */}
         <div className="h-[74px] flex items-center px-6 border-b border-[#E2E7E2]">
-          <Link href="/" className="shrink-0" aria-label="Farm2Market AI Home">
-            <Logo size={32} />
+          <Link href="/" className="shrink-0" aria-label="AgriHaat AI Home">
+            <Image
+              src="/agrihaat-logo.jpeg"
+              alt="AgriHaat AI"
+              width={160}
+              height={48}
+              className="h-10 w-auto object-contain rounded-lg"
+              priority
+            />
           </Link>
         </div>
 
@@ -135,7 +142,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         <nav className="flex-1 overflow-y-auto p-3 space-y-1" aria-label="Sidebar Navigation">
           {navLinks.map((item) => {
             const Icon = item.icon;
-            const isActive = pathname === item.href || (item.href !== "/" && pathname.startsWith(item.href) && item.href !== "/farmer" && item.href !== "/buyer" && item.href !== "/logistics" && item.href !== "/admin");
+            const isActive =
+              pathname === item.href ||
+              (item.href !== "/" &&
+                pathname.startsWith(item.href) &&
+                item.href !== "/farmer" &&
+                item.href !== "/buyer" &&
+                item.href !== "/logistics" &&
+                item.href !== "/admin");
             return (
               <Link
                 key={item.href}
@@ -189,7 +203,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
             </button>
             <div className="lg:hidden">
               <Link href="/">
-                <Logo size={28} />
+                <Image
+                  src="/agrihaat-logo.jpeg"
+                  alt="AgriHaat AI"
+                  width={140}
+                  height={40}
+                  className="h-8 w-auto object-contain rounded-lg"
+                  priority
+                />
               </Link>
             </div>
             <div className="hidden sm:flex items-center gap-2 text-xs text-[#687D6B]">
@@ -209,8 +230,14 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-xs top-[74px]" onClick={() => setMobileMenuOpen(false)}>
-            <div className="bg-white w-64 h-[calc(100vh-74px)] p-4 flex flex-col justify-between" onClick={(e) => e.stopPropagation()}>
+          <div
+            className="lg:hidden fixed inset-0 z-40 bg-black/40 backdrop-blur-xs top-[74px]"
+            onClick={() => setMobileMenuOpen(false)}
+          >
+            <div
+              className="bg-white w-64 h-[calc(100vh-74px)] p-4 flex flex-col justify-between"
+              onClick={(e) => e.stopPropagation()}
+            >
               <nav className="space-y-1">
                 {navLinks.map((item) => {
                   const Icon = item.icon;
@@ -274,19 +301,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
         </nav>
       </div>
 
-      {/* ─── Floating AI Chat Button (visible on all authenticated pages) ─── */}
+      {/* ─── Floating AI Chat Button ─── */}
       <button
         type="button"
-        onClick={() => setAiChatOpen(true)}
+        onClick={() => setAiChatOpen(!aiChatOpen)}
         className="fixed bottom-20 lg:bottom-6 right-4 lg:right-6 z-40 flex items-center gap-2 rounded-full bg-[#16803A] px-4 py-3 text-xs font-bold text-white shadow-lg hover:bg-[#16803A]/90 transition-all hover:scale-105 active:scale-95"
         aria-label="Open AgriHaat AI Copilot"
       >
-        <Sparkles className="size-4" />
-        <span className="hidden sm:inline">Ask AI</span>
+        <Sparkles className="size-4 text-emerald-200" />
+        <span className="hidden sm:inline">{lang === "hi" ? "AI से पूछें" : "Ask AI"}</span>
       </button>
 
-      {/* AI Assistant Modal */}
-      <AIAssistantModal isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} />
+      {/* Floating AI Chat Popup Component */}
+      <AIChatPopup isOpen={aiChatOpen} onClose={() => setAiChatOpen(false)} />
     </div>
   );
 }
