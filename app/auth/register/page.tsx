@@ -1,151 +1,144 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  ArrowRight,
-  Sprout,
-  ShoppingBag,
-  Building2,
-  CheckCircle2,
-  Mail,
-  Lock,
-  Phone,
-  MapPin,
-} from "lucide-react";
-import { Logo } from "@/components/landing/logo";
-import { useAuth, type UserRole } from "@/components/auth/auth-context";
-import { useLanguage } from "@/components/site/language-context";
+import Link from "next/link";
+import { useAuth, UserRole } from "@/components/auth/auth-context";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { loginAs } = useAuth();
-  const { lang } = useLanguage();
-
+  const { registerUser } = useAuth();
   const [role, setRole] = useState<UserRole>("farmer");
-  const [name, setName] = useState("Ramesh Kumar");
-  const [org, setOrg] = useState("ABC FPO Kanchipuram");
-  const [phone, setPhone] = useState("+91 98401 23456");
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    password: "",
+    organization: "",
+    location: "",
+  });
 
-  const handleRegister = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    loginAs(role);
+
+    registerUser({
+      name: formData.name,
+      phone: formData.phone,
+      password: formData.password,
+      email: `${formData.phone}@agrihaat.user`,
+      role,
+      organization: formData.organization,
+      location: formData.location,
+    });
+
     if (role === "farmer") router.push("/farmer/dashboard");
     else if (role === "buyer") router.push("/buyer/dashboard");
-    else router.push("/farmer/dashboard");
+    else if (role === "hub") router.push("/logistics/dashboard");
+    else router.push("/");
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF7] text-[#172019] flex flex-col justify-between p-4 sm:p-6 lg:p-8">
-      {/* Top Brand Bar */}
-      <div className="max-w-md w-full mx-auto flex items-center justify-between">
-        <Link href="/">
-          <Logo size={32} />
-        </Link>
-        <Link href="/auth/login" className="text-xs font-semibold text-[#687D6B] hover:text-[#172019]">
-          Sign In Instead
-        </Link>
-      </div>
-
-      {/* Main Card */}
-      <div className="max-w-md w-full mx-auto my-8 bg-white rounded-3xl border border-[#E2E7E2] p-6 sm:p-8 shadow-sm space-y-6">
-        <div>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-[#16803A]">
-            JOIN AGRIHAAT DIRECT NETWORK
-          </span>
-          <h1 className="font-serif text-2xl font-bold text-[#172019] mt-1">
-            {lang === "hi" ? "नया खाता पंजीकृत करें" : "Create Verified Account"}
-          </h1>
-          <p className="text-xs text-[#687D6B] mt-0.5">
-            Connect directly with verified agricultural buyers & farmers.
-          </p>
+    <div className="min-h-screen bg-[#F4F6F4] flex flex-col justify-center px-4 py-8 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md bg-white p-6 rounded-2xl border border-[#E2E7E2] shadow-sm space-y-4">
+        <div className="text-center">
+          <Link href="/" className="inline-flex items-center gap-2 font-bold text-xl text-[#172019]">
+            <img src="/agrihaat-logo.jpeg" alt="AgriHaat" className="h-9 w-9 rounded-lg object-cover" />
+            <span>AgriHaat AI</span>
+          </Link>
+          <h2 className="mt-3 text-xl font-bold text-[#172019]">Create Your Account</h2>
         </div>
 
-        {/* Role Selection */}
-        <div className="space-y-1.5">
-          <label className="text-xs font-bold text-[#172019]">I am registering as a:</label>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => setRole("farmer")}
-              className={`p-3 rounded-2xl border text-left transition ${
-                role === "farmer"
-                  ? "border-[#16803A] bg-[#EEF7EF] text-[#16803A] ring-2 ring-[#16803A]/20"
-                  : "border-[#E2E7E2] hover:bg-[#FAFAF7] text-[#172019]"
-              }`}
-            >
-              <Sprout className="size-4 mb-1" />
-              <p className="font-bold text-xs">Farmer / FPO</p>
-              <p className="text-[10px] text-[#687D6B]">Sell harvests direct</p>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setRole("buyer")}
-              className={`p-3 rounded-2xl border text-left transition ${
-                role === "buyer"
-                  ? "border-[#172019] bg-[#FAFAF7] text-[#172019] ring-2 ring-[#172019]/20"
-                  : "border-[#E2E7E2] hover:bg-[#FAFAF7] text-[#172019]"
-              }`}
-            >
-              <ShoppingBag className="size-4 mb-1" />
-              <p className="font-bold text-xs">Buyer / Restaurant</p>
-              <p className="text-[10px] text-[#687D6B]">Source bulk produce</p>
-            </button>
+        <form className="space-y-3" onSubmit={handleSubmit}>
+          <div>
+            <label className="block text-xs font-semibold text-[#172019] mb-1">Select Role</label>
+            <div className="grid grid-cols-3 gap-2">
+              {(["farmer", "buyer", "hub"] as UserRole[]).map((r) => (
+                <button
+                  key={r}
+                  type="button"
+                  onClick={() => setRole(r)}
+                  className={`py-2 text-[11px] font-bold rounded-xl border capitalize ${
+                    role === r ? "bg-[#16803A] text-white border-[#16803A]" : "bg-white text-[#687D6B] border-[#E2E7E2]"
+                  }`}
+                >
+                  {r}
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
 
-        {/* Form */}
-        <form onSubmit={handleRegister} className="space-y-3.5 text-xs">
-          <div className="space-y-1">
-            <label className="font-bold text-[#172019]">Full Name</label>
+          <div>
+            <label className="block text-xs font-medium text-[#172019]">Full Name</label>
             <input
               type="text"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full rounded-xl border border-[#E2E7E2] px-3.5 py-2.5 outline-none focus:border-[#16803A]"
+              required
+              value={formData.name}
+              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+              placeholder="e.g. Ramesh Kumar"
+              className="w-full mt-1 p-2.5 text-xs border border-[#E2E7E2] rounded-lg"
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="font-bold text-[#172019]">FPO / Farm / Business Name</label>
+          <div>
+            <label className="block text-xs font-medium text-[#172019]">Phone Number</label>
             <input
-              type="text"
-              value={org}
-              onChange={(e) => setOrg(e.target.value)}
-              className="w-full rounded-xl border border-[#E2E7E2] px-3.5 py-2.5 outline-none focus:border-[#16803A]"
+              type="tel"
+              required
+              value={formData.phone}
+              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+              placeholder="+91 98401 23456"
+              className="w-full mt-1 p-2.5 text-xs border border-[#E2E7E2] rounded-lg"
             />
           </div>
 
-          <div className="space-y-1">
-            <label className="font-bold text-[#172019]">Mobile Number (for SMS & WhatsApp Dispatch Alerts)</label>
+          <div>
+            <label className="block text-xs font-medium text-[#172019]">Password</label>
             <input
-              type="text"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              className="w-full rounded-xl border border-[#E2E7E2] px-3.5 py-2.5 outline-none focus:border-[#16803A]"
+              type="password"
+              required
+              value={formData.password}
+              onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+              placeholder="Create password"
+              className="w-full mt-1 p-2.5 text-xs border border-[#E2E7E2] rounded-lg"
             />
           </div>
 
-          <button
-            type="submit"
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-[#16803A] py-3 text-xs font-bold text-white hover:bg-[#16803A]/90 transition shadow-xs mt-4"
-          >
-            Create Account & Launch Workspace <ArrowRight className="size-3.5" />
+          <div>
+            <label className="block text-xs font-medium text-[#172019]">Organization / Farm</label>
+            <input
+              type="text"
+              required
+              value={formData.organization}
+              onChange={(e) => setFormData({ ...formData, organization: e.target.value })}
+              placeholder="Farm or Business Name"
+              className="w-full mt-1 p-2.5 text-xs border border-[#E2E7E2] rounded-lg"
+            />
+          </div>
+
+          <div>
+            <label className="block text-xs font-medium text-[#172019]">Location</label>
+            <input
+              type="text"
+              required
+              value={formData.location}
+              onChange={(e) => setFormData({ ...formData, location: e.target.value })}
+              placeholder="District, State"
+              className="w-full mt-1 p-2.5 text-xs border border-[#E2E7E2] rounded-lg"
+            />
+          </div>
+
+          <button type="submit" className="w-full py-2.5 bg-[#16803A] text-white text-xs font-bold rounded-full mt-2 hover:bg-[#12682F]">
+            Sign Up & Complete Account
           </button>
         </form>
 
-        <div className="text-center text-xs text-[#687D6B]">
-          Already have an account?{" "}
-          <Link href="/auth/login" className="font-bold text-[#16803A] hover:underline">
-            Sign In Here
-          </Link>
+        <div className="text-center">
+          <p className="text-[11px] text-[#687D6B]">
+            Already have an account?{" "}
+            <Link href="/auth/login" className="font-bold text-[#16803A] hover:underline">
+              Log In
+            </Link>
+          </p>
         </div>
-      </div>
-
-      <div className="text-center text-xs text-[#687D6B]">
-        AgriHaat AI · Secure Agricultural Trade Network
       </div>
     </div>
   );

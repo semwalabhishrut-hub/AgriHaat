@@ -17,15 +17,10 @@ import {
   User,
   Users,
   Building2,
-  Settings,
   LogOut,
   Menu,
   X,
   FileText,
-  ShieldCheck,
-  ChevronRight,
-  HelpCircle,
-  QrCode,
   Layers,
   Sparkles,
 } from "lucide-react";
@@ -52,7 +47,7 @@ export function AppShell({ children }: { children: React.ReactNode }) {
 
   const role = user?.role || "farmer";
 
-  // Navigation Links tailored to each Role
+  // Dynamic Navigation Links tailored strictly to each Role
   const getNavLinks = (): NavItem[] => {
     switch (role) {
       case "farmer":
@@ -125,15 +120,19 @@ export function AppShell({ children }: { children: React.ReactNode }) {
           </Link>
         </div>
 
-        {/* User Persona Chip */}
+        {/* User Persona Chip (Role-Synced Fallbacks) */}
         <div className="p-4 border-b border-[#E2E7E2] bg-[#FAFAF7]">
           <div className="flex items-center gap-3">
             <div className="grid size-9 place-items-center rounded-full bg-[#16803A] text-white font-bold text-sm shadow-xs">
-              {user?.avatarLetter || "R"}
+              {user?.avatarLetter || (role === "buyer" ? "A" : role === "hub" ? "M" : "R")}
             </div>
             <div className="min-w-0 flex-1">
-              <p className="text-xs font-bold text-[#172019] truncate">{user?.name || "Ramesh Kumar"}</p>
-              <p className="text-[11px] text-[#687D6B] truncate">{user?.organization || "ABC FPO"}</p>
+              <p className="text-xs font-bold text-[#172019] truncate">
+                {user?.name || (role === "buyer" ? "Anita Rao" : role === "hub" ? "Murugan S." : "Ramesh Kumar")}
+              </p>
+              <p className="text-[11px] text-[#687D6B] truncate">
+                {user?.organization || (role === "buyer" ? "Grand Hotels & Retail" : role === "hub" ? "Central Collection Hub" : "ABC FPO")}
+              </p>
             </div>
           </div>
         </div>

@@ -1,179 +1,116 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import {
-  UserCheck,
-  Shield,
-  ArrowRight,
-  Sparkles,
-  Lock,
-  Mail,
-  Sprout,
-  ShoppingBag,
-  Truck,
-  Building2,
-} from "lucide-react";
-import { Logo } from "@/components/landing/logo";
-import { useAuth, type UserRole } from "@/components/auth/auth-context";
-import { useLanguage } from "@/components/site/language-context";
+import Link from "next/link";
+import { useAuth, UserRole } from "@/components/auth/auth-context";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { loginAs } = useAuth();
-  const { lang } = useLanguage();
+  const { loginWithCredentials, loginAsDemo } = useAuth();
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-  const [email, setEmail] = useState("ramesh.k@abcfpo.in");
-  const [password, setPassword] = useState("••••••••");
-
-  const handleDemoLogin = (role: UserRole) => {
-    loginAs(role);
-    if (role === "farmer") router.push("/farmer/dashboard");
-    else if (role === "buyer") router.push("/buyer/dashboard");
-    else if (role === "hub") router.push("/logistics/dashboard");
-    else if (role === "admin") router.push("/admin/dashboard");
-    else router.push("/farmer/dashboard");
+  const handleLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    const success = loginWithCredentials(identifier, password);
+    if (success) {
+      router.push("/");
+    } else {
+      setError(
+        "No registered account found with these details. Please check your credentials or register a new account below."
+      );
+    }
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    handleDemoLogin("farmer");
+  const handleDemoLogin = (role: UserRole) => {
+    loginAsDemo(role);
+    if (role === "farmer") router.push("/farmer/dashboard");
+    else if (role === "buyer") router.push("/buyer/dashboard");
+    else router.push("/logistics/dashboard");
   };
 
   return (
-    <div className="min-h-screen bg-[#FAFAF7] text-[#172019] flex flex-col justify-between p-4 sm:p-6 lg:p-8">
-      {/* Top Brand Bar */}
-      <div className="max-w-md w-full mx-auto flex items-center justify-between">
-        <Link href="/">
-          <Logo size={32} />
-        </Link>
-        <Link href="/" className="text-xs font-semibold text-[#687D6B] hover:text-[#172019]">
-          Back to Home
-        </Link>
-      </div>
+    <div className="min-h-screen bg-[#F4F6F4] flex flex-col justify-center px-4 py-8 sm:px-6 lg:px-8">
+      <div className="sm:mx-auto sm:w-full sm:max-w-md bg-white p-6 rounded-2xl border border-[#E2E7E2] shadow-sm space-y-4">
+        <div className="text-center">
+          <Link href="/" className="inline-flex items-center gap-2 font-bold text-xl text-[#172019]">
+            <img src="/agrihaat-logo.jpeg" alt="AgriHaat" className="h-9 w-9 rounded-lg object-cover" />
+            <span>AgriHaat AI</span>
+          </Link>
+          <h2 className="mt-3 text-xl font-bold text-[#172019]">Login to Your Account</h2>
+        </div>
 
-      {/* Main Card */}
-      <div className="max-w-md w-full mx-auto my-8 bg-white rounded-3xl border border-[#E2E7E2] p-6 sm:p-8 shadow-sm space-y-6">
-        <div>
-          <span className="text-[10px] font-bold uppercase tracking-wider text-[#16803A]">
-            AGRIHAAT SECURE LOGIN
-          </span>
-          <h1 className="font-serif text-2xl font-bold text-[#172019] mt-1">
-            {lang === "hi" ? "प्लेटफ़ॉर्म में प्रवेश करें" : "Sign In to Your Workspace"}
-          </h1>
-          <p className="text-xs text-[#687D6B] mt-0.5">
-            Select a role to test the live agricultural platform instantly.
+        {error && (
+          <p className="text-[11px] text-red-600 bg-red-50 p-2.5 rounded-lg border border-red-200">
+            {error}
           </p>
-        </div>
+        )}
 
-        {/* 1-Click Quick Demo Sandbox Selectors */}
-        <div className="space-y-2">
-          <p className="text-xs font-bold text-[#172019]">1-Click Quick Demo Login:</p>
-          <div className="grid grid-cols-2 gap-2">
-            <button
-              type="button"
-              onClick={() => handleDemoLogin("farmer")}
-              className="flex items-center gap-2 p-2.5 rounded-xl border border-[#16803A]/30 bg-[#EEF7EF] text-left hover:bg-[#16803A] hover:text-white transition group"
-            >
-              <Sprout className="size-4 text-[#16803A] group-hover:text-white" />
-              <div>
-                <p className="font-bold text-xs">Demo Farmer</p>
-                <p className="text-[10px] text-[#687D6B] group-hover:text-white/80">Ramesh (500 kg)</p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleDemoLogin("buyer")}
-              className="flex items-center gap-2 p-2.5 rounded-xl border border-[#E2E7E2] bg-[#FAFAF7] text-left hover:bg-[#172019] hover:text-white transition group"
-            >
-              <ShoppingBag className="size-4 text-[#172019] group-hover:text-white" />
-              <div>
-                <p className="font-bold text-xs">Demo Buyer</p>
-                <p className="text-[10px] text-[#687D6B] group-hover:text-white/80">Anita (2,000 kg)</p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleDemoLogin("hub")}
-              className="flex items-center gap-2 p-2.5 rounded-xl border border-[#E2E7E2] bg-[#FAFAF7] text-left hover:bg-[#16A34A] hover:text-white transition group"
-            >
-              <Truck className="size-4 text-[#16803A] group-hover:text-white" />
-              <div>
-                <p className="font-bold text-xs">Demo Logistics</p>
-                <p className="text-[10px] text-[#687D6B] group-hover:text-white/80">Hub Route (124 km)</p>
-              </div>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => handleDemoLogin("admin")}
-              className="flex items-center gap-2 p-2.5 rounded-xl border border-[#E2E7E2] bg-[#FAFAF7] text-left hover:bg-[#07110B] hover:text-white transition group"
-            >
-              <Building2 className="size-4 text-[#172019] group-hover:text-white" />
-              <div>
-                <p className="font-bold text-xs">Demo Admin</p>
-                <p className="text-[10px] text-[#687D6B] group-hover:text-white/80">Government Ops</p>
-              </div>
-            </button>
-          </div>
-        </div>
-
-        {/* Divider */}
-        <div className="relative flex items-center justify-center">
-          <div className="border-t border-[#E2E7E2] w-full" />
-          <span className="bg-white px-3 text-[11px] text-[#687D6B] uppercase font-semibold">Or Email Login</span>
-        </div>
-
-        {/* Standard Form */}
-        <form onSubmit={handleFormSubmit} className="space-y-3.5">
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-[#172019]">Registered Email / Phone</label>
-            <div className="flex items-center gap-2 rounded-xl border border-[#E2E7E2] px-3.5 py-2.5 text-xs">
-              <Mail className="size-4 text-[#687D6B]" />
-              <input
-                type="text"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="flex-1 outline-none text-[#172019]"
-              />
-            </div>
+        <form onSubmit={handleLogin} className="space-y-3">
+          <div>
+            <label className="block text-xs font-medium text-[#172019] mb-1">
+              Phone Number or Email
+            </label>
+            <input
+              type="text"
+              required
+              placeholder="+91 98401 23456"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              className="w-full p-2.5 text-xs border border-[#E2E7E2] rounded-lg focus:ring-1 focus:ring-[#16803A]"
+            />
           </div>
 
-          <div className="space-y-1">
-            <label className="text-xs font-bold text-[#172019]">Password</label>
-            <div className="flex items-center gap-2 rounded-xl border border-[#E2E7E2] px-3.5 py-2.5 text-xs">
-              <Lock className="size-4 text-[#687D6B]" />
-              <input
-                type="password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="flex-1 outline-none text-[#172019]"
-              />
-            </div>
+          <div>
+            <label className="block text-xs font-medium text-[#172019] mb-1">Password</label>
+            <input
+              type="password"
+              required
+              placeholder="Enter password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full p-2.5 text-xs border border-[#E2E7E2] rounded-lg focus:ring-1 focus:ring-[#16803A]"
+            />
           </div>
 
           <button
             type="submit"
-            className="flex w-full items-center justify-center gap-2 rounded-full bg-[#16803A] py-3 text-xs font-bold text-white hover:bg-[#16803A]/90 transition shadow-xs"
+            className="w-full py-2.5 bg-[#16803A] text-white text-xs font-bold rounded-full hover:bg-[#12682F] transition"
           >
-            Enter Platform <ArrowRight className="size-3.5" />
+            Log In
           </button>
         </form>
 
-        <div className="text-center text-xs text-[#687D6B]">
-          Don't have an account?{" "}
-          <Link href="/auth/register" className="font-bold text-[#16803A] hover:underline">
-            Register New Farm / Business
-          </Link>
+        {/* Link to Registration Page */}
+        <div className="p-3 bg-[#EEF7EF] rounded-xl border border-[#D0E7D3] text-center">
+          <p className="text-xs text-[#172019]">
+            Don't have an account yet?{" "}
+            <Link href="/auth/register" className="font-bold text-[#16803A] hover:underline">
+              Register New User
+            </Link>
+          </p>
         </div>
-      </div>
 
-      {/* Footer */}
-      <div className="text-center text-xs text-[#687D6B]">
-        AgriHaat AI · Ministry of Consumer Affairs Problem Statement 26033/26032
+        {/* Fallback Quick Demo Profiles */}
+        <div className="border-t border-[#E2E7E2] pt-3 text-center">
+          <p className="text-[11px] text-[#687D6B] mb-2">Or test directly with Demo Profiles:</p>
+          <div className="flex gap-2">
+            <button
+              onClick={() => handleDemoLogin("farmer")}
+              className="flex-1 py-1.5 text-[10px] font-bold bg-[#F8FAF8] border border-[#E2E7E2] text-[#16803A] rounded-lg hover:bg-[#EEF7EF]"
+            >
+              Ramesh (Farmer)
+            </button>
+            <button
+              onClick={() => handleDemoLogin("buyer")}
+              className="flex-1 py-1.5 text-[10px] font-bold bg-[#F8FAF8] border border-[#E2E7E2] text-[#16803A] rounded-lg hover:bg-[#EEF7EF]"
+            >
+              Anita (Buyer)
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );

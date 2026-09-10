@@ -366,7 +366,12 @@ export function useLanguage() {
 }
 
 // ─── Standalone exported helper (works reactively with language state if imported from hook) ───
-export const rupees = (value: number) => `₹${value.toLocaleString("en-IN")}`;
+export const rupees = (value?: number | null) => {
+  if (value === undefined || value === null || isNaN(value)) {
+    return "₹0";
+  }
+  return `₹${value.toLocaleString("en-IN")}`;
+};
 
 // ─── Language dropdown component ───
 export function LanguageSwitcher() {

@@ -14,6 +14,7 @@ export interface UserProfile {
   location: string;
   avatarLetter: string;
   verified: boolean;
+  password?: string;
 }
 
 const DEMO_PROFILES: Record<UserRole, UserProfile> = {
@@ -66,17 +67,21 @@ const DEMO_PROFILES: Record<UserRole, UserProfile> = {
 interface AuthContextType {
   user: UserProfile | null;
   isAuthenticated: boolean;
-  loginAs: (role: UserRole) => void;
+  registerUser: (profile: Omit<UserProfile, "id" | "avatarLetter" | "verified">) => void;
+  loginWithCredentials: (identifier: string, pass: string) => boolean;
+  loginAsDemo: (role: UserRole) => void;
   logout: () => void;
   isAuthModalOpen: boolean;
-  openAuthModal: (initialRole?: UserRole) => void;
+  openAuthModal: () => void;
   closeAuthModal: () => void;
 }
 
 const AuthContext = createContext<AuthContextType>({
   user: null,
   isAuthenticated: false,
-  loginAs: () => {},
+  registerUser: () => {},
+  loginWithCredentials: () => false,
+  loginAsDemo: () => {},
   logout: () => {},
   isAuthModalOpen: false,
   openAuthModal: () => {},
@@ -88,31 +93,65 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
 
   useEffect(() => {
-    // Check saved session in localStorage
-    const savedRole = localStorage.getItem("f2m_user_role") as UserRole | null;
-    if (savedRole && DEMO_PROFILES[savedRole]) {
-      setUser(DEMO_PROFILES[savedRole]);
+    if (typeof window !== "undefined" && window.location.pathname !== "/") {
+      const activeSession = localStorage.getItem("f2m_active_user");
+      if (activeSession) {
+        try {
+          setUser(JSON.parse(activeSession));
+        } catch (e) {
+          console.error("Failed to restore session", e);
+        }
+      }
     }
   }, []);
 
-  const loginAs = (role: UserRole) => {
-    const profile = DEMO_PROFILES[role];
-    setUser(profile);
-    localStorage.setItem("f2m_user_role", role);
-    setIsAuthModalOpen(false);
+  // Register dynamic user with password
+  const registerUser = (profileData: Omit<UserProfile, "id" | "avatarLetter" | "verified">) => {
+    const newUser: UserProfile = {
+      ...profileData,
+      id: `user-${Date.now()}`,
+      avatarLetter: profileData.name.charAt(0).toUpperCase(),
+      verified: true,
+    };
+
+    // Store in user database array
+    const existingUsersRaw = localStorage.getItem("f2m_registered_users");
+    const registeredUsers: UserProfile[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+    registeredUsers.push(newUser);
+
+    localStorage.setItem("f2m_registered_users", JSON.stringify(registeredUsers));
+    localStorage.setItem("f2m_active_user", JSON.stringify(newUser));
+    setUser(newUser);
+  };
+
+  // Login checking credentials against registered users
+  const loginWithCredentials = (identifier: string, pass: string): boolean => {
+    const existingUsersRaw = localStorage.getItem("f2m_registered_users");
+    const registeredUsers: UserProfile[] = existingUsersRaw ? JSON.parse(existingUsersRaw) : [];
+
+    const matched = registeredUsers.find(
+      (u) => (u.phone === identifier || u.email === identifier) && u.password === pass
+    );
+
+    if (matched) {
+      setUser(matched);
+      localStorage.setItem("f2m_active_user", JSON.stringify(matched));
+      return true;
+    }
+
+    return false;
+  };
+
+  // Quick fallback demo login
+  const loginAsDemo = (role: UserRole) => {
+    const demoUser = DEMO_PROFILES[role];
+    setUser(demoUser);
+    localStorage.setItem("f2m_active_user", JSON.stringify(demoUser));
   };
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem("f2m_user_role");
-  };
-
-  const openAuthModal = (initialRole?: UserRole) => {
-    setIsAuthModalOpen(true);
-  };
-
-  const closeAuthModal = () => {
-    setIsAuthModalOpen(false);
+    localStorage.removeItem("f2m_active_user");
   };
 
   return (
@@ -120,11 +159,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       value={{
         user,
         isAuthenticated: !!user,
-        loginAs,
+        registerUser,
+        loginWithCredentials,
+        loginAsDemo,
         logout,
         isAuthModalOpen,
-        openAuthModal,
-        closeAuthModal,
+        openAuthModal: () => setIsAuthModalOpen(true),
+        closeAuthModal: () => setIsAuthModalOpen(false),
       }}
     >
       {children}
