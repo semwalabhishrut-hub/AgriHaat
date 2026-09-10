@@ -1,14 +1,15 @@
 import type { Metadata, Viewport } from "next";
-import "./globals.css";
+import "@/styles/globals.css";
+import { LanguageProvider } from "@/components/site/language-context";
 
 export const metadata: Metadata = {
-  title: "AgriHaat AI",
+  title: "AgriHaat",
   description: "Farmer-first agricultural procurement platform",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "default",
-    title: "AgriHaat AI",
+    title: "AgriHaat",
   },
 };
 
@@ -27,7 +28,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="apple-touch-icon" href="/agrihaat-logo.jpeg" />
       </head>
       <body className="bg-[#FAFAF7] text-[#172019] antialiased">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );
